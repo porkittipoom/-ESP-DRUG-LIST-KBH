@@ -6,19 +6,21 @@
     <title>Dashboard บัญชียาเฉพาะรายโรงพยาบาลกระบี่</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome icons -->
+    <!-- Google Fonts: Sarabun & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Prompt & Sarabun -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Prompt', 'Sarabun', 'sans-serif'],
+                        sans: ['Sarabun', 'Inter', 'sans-serif'],
                     },
                     colors: {
-                        hospital: {
+                        brand: {
                             50: '#f0fdf4',
                             100: '#dcfce7',
                             500: '#22c55e',
@@ -33,321 +35,404 @@
         }
     </script>
     <style>
-        body { font-family: 'Prompt', 'Sarabun', sans-serif; }
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        /* Style scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Print Styles */
         @media print {
-            .no-print { display: none !important; }
-            body { background: white !important; }
-            .shadow-sm, .shadow-lg, .shadow-md { box-shadow: none !important; }
+            header button, .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                padding-bottom: 0 !important;
+            }
+            main {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .shadow-sm, .shadow-lg {
+                box-shadow: none !important;
+            }
+            .border {
+                border-color: #cbd5e1 !important;
+            }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+<body class="bg-slate-50 text-slate-800 min-h-screen pb-12">
 
-    <!-- Header Section -->
-    <header class="bg-hospital-700 text-white shadow-lg sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div class="flex items-center space-x-3">
-                <div class="bg-white p-2.5 rounded-full text-hospital-700 text-xl font-bold w-11 h-11 flex items-center justify-center shadow-md shrink-0">
-                    <i class="fa-solid fa-hospital-user"></i>
-                </div>
+    <!-- Top Navigation Header -->
+    <header class="bg-gradient-to-r from-emerald-800 via-teal-800 to-slate-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h1 class="text-xl md:text-2xl font-bold leading-tight">Dashboard บัญชียาเฉพาะรายโรงพยาบาลกระบี่</h1>
-                    <p class="text-xs sm:text-sm text-emerald-100 font-medium mt-0.5 flex items-center gap-1.5">
-                        <i class="fa-solid fa-circle-check text-emerald-300"></i> ข้อมูลอัปเดตล่าสุด: 58 รายการ (ปีงบ2570)
+                    <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white flex items-center gap-3">
+                        <i class="fa-solid fa-pills text-emerald-400"></i>
+                        Dashboard บัญชียาเฉพาะรายโรงพยาบาลกระบี่
+                    </h1>
+                    <p class="text-emerald-100 text-sm sm:text-base mt-1 font-medium flex items-center gap-2">
+                        <i class="fa-regular fa-calendar-check text-emerald-300"></i>
+                        ข้อมูลอัปเดตล่าสุด: 58 รายการ (ปีงบ2570)
                     </p>
                 </div>
-            </div>
-            <div class="no-print flex items-center gap-2">
-                <button onclick="window.print()" class="px-3.5 py-1.5 bg-emerald-800 hover:bg-emerald-900 text-white rounded-lg text-xs font-medium transition flex items-center gap-1.5 border border-emerald-600 shadow-sm">
-                    <i class="fa-solid fa-print"></i> พิมพ์ / พิมพ์PDF
+                <!-- Print / Print PDF Button (Replaces Total Badge) -->
+                <button onclick="window.print()" class="flex items-center gap-2.5 bg-emerald-700/80 hover:bg-emerald-600 active:bg-emerald-800 text-white font-medium px-5 py-2.5 rounded-full border border-emerald-500/30 shadow-sm transition-all self-start md:self-auto cursor-pointer">
+                    <i class="fa-solid fa-print text-lg"></i>
+                    <span>พิมพ์ / พิมพ์PDF</span>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full">
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
 
-        <!-- Summary Stats Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
-                <div class="p-3 bg-blue-100 text-blue-600 rounded-lg shrink-0">
-                    <i class="fa-solid fa-pills text-2xl"></i>
+        <!-- Metrics Overview Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-3 sm:gap-4 mb-6">
+            <!-- Total -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 col-span-2 md:col-span-1">
+                <div class="p-3 bg-blue-50 text-blue-600 rounded-lg">
+                    <i class="fa-solid fa-prescription-bottle-medical text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold text-slate-500 uppercase">รายการยาทั้งหมด</p>
-                    <p class="text-2xl font-bold text-slate-800" id="stat-total">58</p>
-                    <p class="text-xs text-slate-400">รายการในระบบ</p>
+                    <div class="text-xs font-medium text-slate-500">ยาทั้งหมด</div>
+                    <div class="text-xl font-bold text-slate-800" id="stat-total">58</div>
                 </div>
             </div>
-
-            <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
-                <div class="p-3 bg-amber-100 text-amber-600 rounded-lg shrink-0">
-                    <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            <!-- NED -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div class="p-3 bg-amber-50 text-amber-600 rounded-lg">
+                    <i class="fa-solid fa-triangle-exclamation text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold text-slate-500 uppercase">ยานอกบัญชียาหลัก (NED)</p>
-                    <p class="text-2xl font-bold text-amber-600" id="stat-ned">43</p>
-                    <p class="text-xs text-slate-400">74.1% ของรายการทั้งหมด</p>
+                    <div class="text-xs font-medium text-slate-500">ยานอกบัญชี (NED)</div>
+                    <div class="text-xl font-bold text-amber-600" id="stat-ned">43</div>
                 </div>
             </div>
-
-            <div class="bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200 flex items-center space-x-4">
-                <div class="p-3 bg-emerald-100 text-emerald-600 rounded-lg shrink-0">
-                    <i class="fa-solid fa-file-medical text-2xl"></i>
+            <!-- ED ง. -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                    <i class="fa-solid fa-file-medical text-lg"></i>
                 </div>
                 <div>
-                    <p class="text-xs font-semibold text-slate-500 uppercase">ยาในบัญชียาหลัก (ED)</p>
-                    <p class="text-2xl font-bold text-emerald-600" id="stat-ed">15</p>
-                    <p class="text-xs text-slate-400">25.9% (ED จ.2, ED ง., ED ค., ED ข.)</p>
+                    <div class="text-xs font-medium text-slate-500">ED ง.</div>
+                    <div class="text-xl font-bold text-emerald-600" id="stat-ed-ng">10</div>
+                </div>
+            </div>
+            <!-- ED ค. -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div class="p-3 bg-purple-50 text-purple-600 rounded-lg">
+                    <i class="fa-solid fa-notes-medical text-lg"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-slate-500">ED ค.</div>
+                    <div class="text-xl font-bold text-purple-600" id="stat-ed-kh">2</div>
+                </div>
+            </div>
+            <!-- ED ข. -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div class="p-3 bg-sky-50 text-sky-600 rounded-lg">
+                    <i class="fa-solid fa-capsules text-lg"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-slate-500">ED ข.</div>
+                    <div class="text-xl font-bold text-sky-600" id="stat-ed-k">1</div>
+                </div>
+            </div>
+            <!-- ED จ.2 -->
+            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
+                <div class="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
+                    <i class="fa-solid fa-shield-virus text-lg"></i>
+                </div>
+                <div>
+                    <div class="text-xs font-medium text-slate-500">ED จ.2</div>
+                    <div class="text-xl font-bold text-indigo-600" id="stat-ed-j2">2</div>
                 </div>
             </div>
         </div>
 
-        <!-- Filters & Search Section -->
-        <div class="no-print bg-white p-4 sm:p-5 rounded-xl shadow-sm border border-slate-200 mb-6">
-            <div class="flex flex-col md:flex-row gap-4 justify-between items-center">
-                <!-- Search Box -->
-                <div class="relative w-full md:w-1/3">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+        <!-- Filter Controls Card -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5 mb-6 no-print">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4 items-end">
+                <!-- Search Input -->
+                <div class="md:col-span-5 relative">
+                    <label for="search-input" class="block text-xs font-semibold text-slate-600 mb-1">ค้นหารายการยา / ชื่อย่อ</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="search-input" placeholder="พิมพ์ชื่อยา, ความแรง, รูปแบบ หรือแผนก..." 
+                            class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
                     </div>
-                    <input type="text" id="search-input" placeholder="ค้นหาชื่อยา, ขนาด, รูปแบบ หรือแผนก..." 
-                           class="w-full pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-hospital-500 focus:border-transparent transition">
                 </div>
 
-                <!-- Filter Controls -->
-                <div class="flex flex-wrap gap-3 w-full md:w-auto items-center">
-                    <div>
-                        <select id="filter-dept" class="px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-hospital-500">
-                            <option value="ALL">-- ทุกแผนก --</option>
-                            <option value="ONCO">ONCO</option>
-                            <option value="HEMATO">HEMATO</option>
-                            <option value="PSY">PSY</option>
-                            <option value="NEURO">NEURO</option>
-                            <option value="CARDIO">CARDIO</option>
-                            <option value="ENDOCRINE">ENDOCRINE</option>
-                            <option value="GI">GI</option>
-                            <option value="SURG">SURG</option>
-                            <option value="ORTHO">ORTHO</option>
-                            <option value="URO">URO</option>
-                            <option value="ESRD">ESRD</option>
-                            <option value="MED">MED</option>
-                            <option value="SKIN">SKIN</option>
-                            <option value="PEDIATRICS">PEDIATRICS</option>
-                        </select>
-                    </div>
+                <!-- Department Filter -->
+                <div class="md:col-span-3">
+                    <label for="dept-filter" class="block text-xs font-semibold text-slate-600 mb-1">กรองตามแผนก</label>
+                    <select id="dept-filter" class="w-full py-2.5 px-3 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                        <option value="ALL">ทุกแผนกทั้งหมด</option>
+                        <option value="ONCO">ONCO (มะเร็งวิทยา)</option>
+                        <option value="HEMATO">HEMATO (โลหิตวิทยา)</option>
+                        <option value="NEURO">NEURO (ระบบประสาท)</option>
+                        <option value="PSY">PSY (จิตเวช)</option>
+                        <option value="CARDIO">CARDIO (หัวใจและหลอดเลือด)</option>
+                        <option value="ENDOCRINE">ENDOCRINE (ต่อมไร้ท่อ/เบาหวาน)</option>
+                        <option value="GI">GI (ทางเดินอาหาร/ตับ)</option>
+                        <option value="SURG">SURG (ศัลยกรรม)</option>
+                        <option value="ORTHO">ORTHO (ศัลยกรรมออร์โธปิดิกส์)</option>
+                        <option value="URO">URO (ทางเดินปัสสาวะ)</option>
+                        <option value="ESRD">ESRD (โรคไต)</option>
+                        <option value="MED">MED (อายุรกรรมทั่วไป)</option>
+                        <option value="SKIN">SKIN (โรคผิวหนัง)</option>
+                        <option value="PEDIATRICS">PEDIATRICS (กุมารเวชกรรม)</option>
+                    </select>
+                </div>
 
-                    <div>
-                        <select id="filter-nlem" class="px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white focus:outline-none focus:ring-2 focus:ring-hospital-500">
-                            <option value="ALL">-- สถานะ NLEM ทั้งหมด --</option>
-                            <option value="NED">NED</option>
-                            <option value="ED จ.2">ED จ.2</option>
-                            <option value="ED ง.">ED ง.</option>
-                            <option value="ED ค.">ED ค.</option>
-                            <option value="ED ข.">ED ข.</option>
-                        </select>
-                    </div>
+                <!-- NLEM Filter -->
+                <div class="md:col-span-2">
+                    <label for="nlem-filter" class="block text-xs font-semibold text-slate-600 mb-1">กรองตามสถานะ NLEM</label>
+                    <select id="nlem-filter" class="w-full py-2.5 px-3 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
+                        <option value="ALL">สถานะ NLEM ทั้งหมด</option>
+                        <option value="NED">NED (ยานอกบัญชี)</option>
+                        <option value="ED ง.">ED ง.</option>
+                        <option value="ED ค.">ED ค.</option>
+                        <option value="ED ข.">ED ข.</option>
+                        <option value="ED จ.2">ED จ.2</option>
+                    </select>
+                </div>
 
-                    <button id="reset-btn" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg text-sm font-medium transition flex items-center gap-1">
-                        <i class="fa-solid fa-rotate-left"></i> รีเซ็ต
+                <!-- Reset Filter Button -->
+                <div class="md:col-span-2">
+                    <button id="btn-reset-filters-bar" class="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 font-medium text-sm rounded-lg border border-slate-200 transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-rotate-left"></i>
+                        <span>รีเซ็ต</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Main Data Table Container -->
-        <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-            <!-- Table Action Bar -->
-            <div class="px-5 py-3.5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                <span class="text-xs sm:text-sm font-semibold text-slate-600">
-                    แสดงผล <span id="displayed-count" class="text-hospital-700 font-bold">58</span> จาก <span id="total-count">58</span> รายการ
-                </span>
-            </div>
-
-            <!-- Table Header -->
+        <!-- Table Container -->
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="overflow-x-auto">
                 <table class="w-full text-left border-collapse">
-                    <thead class="bg-slate-100 text-slate-700 font-semibold border-b border-slate-200 text-xs sm:text-sm">
-                        <tr>
-                            <th class="py-3.5 px-3 text-center w-14 font-semibold">ลำดับ</th>
-                            <th class="py-3.5 px-4 font-semibold">ชื่อยา (Drug Name)</th>
-                            <th class="py-3.5 px-4 font-semibold">ความแรง / ขนาด</th>
-                            <th class="py-3.5 px-4 font-semibold">รูปแบบยา</th>
-                            <th class="py-3.5 px-3 text-center font-semibold">NLEM</th>
-                            <th class="py-3.5 px-4 font-semibold">แผนก</th>
+                    <thead>
+                        <tr class="bg-slate-100/80 border-b border-slate-200 text-slate-700 text-sm font-semibold uppercase tracking-wider">
+                            <th class="py-3.5 px-4 text-center w-16">ลำดับ</th>
+                            <th class="py-3.5 px-4 min-w-[240px]">ชื่อยา</th>
+                            <th class="py-3.5 px-4 min-w-[140px]">ความแรง / ขนาด</th>
+                            <th class="py-3.5 px-4 min-w-[130px]">รูปแบบยา</th>
+                            <th class="py-3.5 px-4 text-center min-w-[110px]">NLEM</th>
+                            <th class="py-3.5 px-4 min-w-[180px]">แผนก</th>
                         </tr>
                     </thead>
-                    <tbody id="drug-table-body" class="divide-y divide-slate-100">
-                        <!-- Content generated dynamically by JavaScript -->
+                    <tbody id="drug-table-body" class="divide-y divide-slate-200 text-sm text-slate-700 font-normal">
+                        <!-- Content rendered dynamically via JS -->
                     </tbody>
                 </table>
             </div>
 
             <!-- Empty State -->
-            <div id="empty-state" class="hidden py-12 text-center">
-                <i class="fa-solid fa-box-open text-4xl text-slate-300 mb-3"></i>
-                <p class="text-slate-500 font-medium text-sm">ไม่พบข้อมูลยาตรงตามเงื่อนไขการค้นหา</p>
+            <div id="no-results" class="hidden p-12 text-center no-print">
+                <div class="inline-flex p-4 bg-slate-100 rounded-full text-slate-400 mb-3">
+                    <i class="fa-solid fa-box-open text-3xl"></i>
+                </div>
+                <h3 class="text-base font-semibold text-slate-700">ไม่พบข้อมูลยาที่ค้นหา</h3>
+                <p class="text-sm text-slate-500 mt-1">กรุณาลองเปลี่ยนคำค้นหา หรือรีเซ็ตตัวกรองเงื่อนไข</p>
+                <button id="btn-reset-filters" class="mt-4 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer">
+                    รีเซ็ตตัวกรองทั้งหมด
+                </button>
             </div>
         </div>
 
     </main>
 
-    <!-- JavaScript Data and Application Logic -->
+    <!-- JavaScript Application Code -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const drugData = [
-                { id: 1, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 2, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "100 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 3, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "20 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 4, name: "[ESP] DENOSUMAB INJ (CO)", strength: "120 MG/1.7 ML", form: "INJECTION", nlem: "NED", dept: "ORTHO, ONCO, MED" },
-                { id: 5, name: "[ESP] ARIPIPRAZOLE (CO)", strength: "10 MG", form: "TABLET", nlem: "NED", dept: "PSY, NEURO, MED" },
-                { id: 6, name: "[ESP] (Alvopanib) PAZOPANIB (PAY)", strength: "200 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 7, name: "[ESP] (Votrient) PAZOPANIB (CO)", strength: "200 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 8, name: "[ESP] BCG MEDAC FOR BLADDER INTRAVESICAL", strength: "200M CFU", form: "INTRAVESICAL", nlem: "ED ง.", dept: "URO, MED" },
-                { id: 9, name: "[ESP] BENDAMUSTINE INJ จ.2 [CHEMO]", strength: "100 MG", form: "INJECTION", nlem: "ED จ.2", dept: "HEMATO" },
-                { id: 10, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "180 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 11, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "90 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 12, name: "[ESP] CLONIDINE", strength: "0.15 MG", form: "TABLET", nlem: "ED ข.", dept: "MED, ESRD" },
-                { id: 13, name: "[ESP] DABRAFENIB (CO) [CHEMO]", strength: "75 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 14, name: "[ESP] DESMOPRESSIN ACETATE NASAL SPRAY", strength: "0.1 MG/PUFF", form: "NASAL SPRAY", nlem: "ED ง.", dept: "MED, ENDOCRINE" },
-                { id: 15, name: "[ESP] DESMOPRESSIN SOLUTION", strength: "0.1 MG/ML", form: "NASAL DROP", nlem: "ED ง.", dept: "MED, ENDOCRINE" },
-                { id: 16, name: "[ESP] DONEPEZIL (CO)", strength: "23 MG", form: "TABLET", nlem: "NED", dept: "NEURO, PSY" },
-                { id: 17, name: "[ESP] ELTROMBOPAG FCT (CO)", strength: "25 MG", form: "TABLET", nlem: "NED", dept: "HEMATO" },
-                { id: 18, name: "[ESP] ERIBULIN MESYLATE INJ (CO) [CHEMO]", strength: "1MG/2ML", form: "INJECTION", nlem: "NED", dept: "ONCO" },
-                { id: 19, name: "[ESP] EVOLOCUMAB INJ (CO)", strength: "140 MG/ML", form: "INJECTION", nlem: "NED", dept: "CARDIO, MED" },
-                { id: 20, name: "[ESP] FLECAINIDE (TAMBOCOR)", strength: "100 MG", form: "TABLET", nlem: "ED ง.", dept: "CARDIO" },
-                { id: 21, name: "[ESP] FLUCYTOSINE", strength: "500 MG", form: "CAPSULE", nlem: "ED ง.", dept: "MED, GI" },
-                { id: 22, name: "[ESP] FLUDROCORTISONE", strength: "0.1 MG", form: "TABLET", nlem: "ED ง.", dept: "ENDOCRINE, MED" },
-                { id: 23, name: "[ESP] FLUPENTIXOL DECANOATE INJ", strength: "40 MG/2 ML", form: "INJECTION", nlem: "ED ค.", dept: "PSY" },
-                { id: 24, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "10.8 MG", form: "INJECTION", nlem: "NED", dept: "ONCO" },
-                { id: 25, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "3.6 MG", form: "INJECTION", nlem: "NED", dept: "ONCO" },
-                { id: 26, name: "[ESP] HAEMOPHILUS INFLUENZAE (HIB) VACCINE (CO)", strength: "0.5 ML", form: "INJECTION", nlem: "NED", dept: "PEDIATRICS, MED" },
-                { id: 27, name: "[ESP] INSULIN ASPART INJ", strength: "100IU/ML:3ML", form: "INJECTION", nlem: "ED ง.", dept: "ENDOCRINE, MED" },
-                { id: 28, name: "[ESP] IXEKIZUMAB INJ PFS (CO)", strength: "80 MG", form: "INJECTION", nlem: "NED", dept: "SKIN" },
-                { id: 29, name: "[ESP] LECANEMAB INJ (PAY) [CHEMO]", strength: "200MG/2ML", form: "INJECTION", nlem: "NED", dept: "NEURO" },
-                { id: 30, name: "[ESP] LEUPRORELIN IMPLANT (PAY)", strength: "5 MG", form: "IMPLANT", nlem: "NED", dept: "ONCO, URO" },
-                { id: 31, name: "[ESP] Megestrol acetate ORAL SUSPENSION (CO)", strength: "40 MG/ML:120ML", form: "SUSPENSION", nlem: "NED", dept: "ONCO, MED" },
-                { id: 32, name: "[ESP] MEMANTINE HCL ORAL SOLUTION (CO)", strength: "5MG/PUMP:100ML", form: "SOLUTION", nlem: "NED", dept: "NEURO, PSY" },
-                { id: 33, name: "[ESP] MENINGOCOCCAL POLYSACCHARIDE VACCINE (CO)", strength: "0.5 ML", form: "INJECTION", nlem: "NED", dept: "MED" },
-                { id: 34, name: "[ESP] METHYLPHENIDATE HCL (CO)", strength: "27 MG", form: "TABLET", nlem: "NED", dept: "PSY" },
-                { id: 35, name: "[ESP] METHYLPHENIDATE HCL (CO)", strength: "36 MG", form: "TABLET", nlem: "NED", dept: "PSY" },
-                { id: 36, name: "[ESP] NETUPITANT PALONOSETRON (PAY)", strength: "300 MG/500 MCG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 37, name: "[ESP] PALONOSETRON (CO)", strength: "250 MCG/5ML", form: "INJECTION", nlem: "NED", dept: "ONCO, MED" },
-                { id: 38, name: "[ESP] PANCREATIN (CREON)", strength: "10000 IU", form: "CAPSULE", nlem: "ED ง.", dept: "GI, SURG, MED" },
-                { id: 39, name: "[ESP] PANCREATIN (CREON)", strength: "25000 IU", form: "CAPSULE", nlem: "ED ง.", dept: "GI, SURG, MED" },
-                { id: 40, name: "[ESP] PANCREATIN (CREON)", strength: "40000 IU", form: "CAPSULE", nlem: "ED ง.", dept: "GI, SURG, MED" },
-                { id: 41, name: "[ESP] RUXOLITINIB (CO)", strength: "5 MG", form: "TABLET", nlem: "NED", dept: "HEMATO" },
-                { id: 42, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "300 MG/2ML", form: "INJECTION", nlem: "NED", dept: "SKIN, MED" },
-                { id: 43, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "150 MG/ML", form: "INJECTION", nlem: "NED", dept: "SKIN, MED" },
-                { id: 44, name: "[ESP] SULFINPYRAZONE (CO)", strength: "100 MG", form: "TABLET", nlem: "NED", dept: "ESRD, MED" },
-                { id: 45, name: "[ESP] TEGAFUR/OTERACIL/GIMERACIL (CO) [CHEMO]", strength: "25/24.5/7.25 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 46, name: "[ESP] TESTOVIRON DEPOT INJ", strength: "250 MG", form: "INJECTION", nlem: "ED ค.", dept: "ENDOCRINE, MED" },
-                { id: 47, name: "[ESP] TIRZEPATIDE (PAY)", strength: "10MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", dept: "CARDIO, ENDOCRINE" },
-                { id: 48, name: "[ESP] TIRZEPATIDE (PAY)", strength: "7.5MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", dept: "CARDIO, ENDOCRINE" },
-                { id: 49, name: "[ESP] TIRZEPATIDE (PAY)", strength: "15 MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", dept: "CARDIO, ENDOCRINE" },
-                { id: 50, name: "[ESP] TRAMETINIB (CO) [CHEMO]", strength: "2 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 51, name: "[ESP] VEDOLIZUMAB จ.2 [CHEMO]", strength: "300 MG", form: "INJECTION", nlem: "ED จ.2", dept: "GI" },
-                { id: 52, name: "[ESP] (Allutamide) ENZALUTAMIDE (PAY)", strength: "40 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO, URO" },
-                { id: 53, name: "[ESP] (Xtandi) ENZALUTAMIDE (CO)", strength: "40 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO, URO" },
-                { id: 54, name: "[ESP] โครงการฟรี FRUQUINTINIB [CHEMO]", strength: "5 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 55, name: "[ESP] โครงการฟรี CRIZOTINIB [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", dept: "ONCO" },
-                { id: 56, name: "[ESP] ABEMACICLIB (CO) [CHEMO]", strength: "150 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 57, name: "[ESP] SUNITINIB (CO)", strength: "12.5 MG", form: "TABLET", nlem: "NED", dept: "ONCO" },
-                { id: 58, name: "[ESP] L-ISOLEUCINE+L-LEUCINE+L-VALINE (CO)", strength: "952/1904/1144 MG", form: "GRANULES", nlem: "NED", dept: "GI, MED" }
-            ];
+        // Master Dataset (58 Items) - Corrected & Validated
+        const drugData = [
+            { id: 1, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 2, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "100 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 3, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "20 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 4, name: "[ESP] DENOSUMAB INJ (CO)", strength: "120 MG/1.7 ML", form: "INJECTION", nlem: "NED", depts: ["ONCO", "ORTHO", "MED"] },
+            { id: 5, name: "[ESP] ARIPIPRAZOLE (CO)", strength: "10 MG", form: "TABLET", nlem: "NED", depts: ["PSY", "NEURO", "MED"] },
+            { id: 6, name: "[ESP] (Alvopanib) PAZOPANIB (PAY)", strength: "200 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 7, name: "[ESP] (Votrient) PAZOPANIB (CO)", strength: "200 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 8, name: "[ESP] BCG MEDAC FOR BLADDER INTRAVESICAL", strength: "200M CFU", form: "INTRAVESICAL", nlem: "ED ง.", depts: ["URO", "MED"] },
+            { id: 9, name: "[ESP] BENDAMUSTINE INJ จ.2 [CHEMO]", strength: "100 MG", form: "INJECTION", nlem: "ED จ.2", depts: ["HEMATO"] },
+            { id: 10, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "180 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 11, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "90 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 12, name: "[ESP] CLONIDINE", strength: "0.15 MG", form: "TABLET", nlem: "ED ข.", depts: ["MED", "ESRD"] },
+            { id: 13, name: "[ESP] DABRAFENIB (CO) [CHEMO]", strength: "75 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 14, name: "[ESP] DESMOPRESSIN ACETATE NASAL SPRAY", strength: "0.1 MG/PUFF", form: "NASAL SPRAY", nlem: "ED ง.", depts: ["MED", "ENDOCRINE"] },
+            { id: 15, name: "[ESP] DESMOPRESSIN SOLUTION", strength: "0.1 MG/ML", form: "NASAL DROP", nlem: "ED ง.", depts: ["MED", "ENDOCRINE"] },
+            { id: 16, name: "[ESP] DONEPEZIL (CO)", strength: "23 MG", form: "TABLET", nlem: "NED", depts: ["NEURO", "PSY"] },
+            { id: 17, name: "[ESP] ELTROMBOPAG FCT (CO)", strength: "25 MG", form: "TABLET", nlem: "NED", depts: ["HEMATO"] },
+            { id: 18, name: "[ESP] ERIBULIN MESYLATE INJ (CO) [CHEMO]", strength: "1MG/2ML", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
+            { id: 19, name: "[ESP] EVOLOCUMAB INJ (CO)", strength: "140 MG/ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "MED"] },
+            { id: 20, name: "[ESP] FLECAINIDE (TAMBOCOR)", strength: "100 MG", form: "TABLET", nlem: "ED ง.", depts: ["CARDIO"] },
+            { id: 21, name: "[ESP] FLUCYTOSINE", strength: "500 MG", form: "CAPSULE", nlem: "ED ง.", depts: ["MED", "GI"] },
+            { id: 22, name: "[ESP] FLUDROCORTISONE", strength: "0.1 MG", form: "TABLET", nlem: "ED ง.", depts: ["ENDOCRINE", "MED"] },
+            { id: 23, name: "[ESP] FLUPENTIXOL DECANOATE INJ", strength: "40 MG/2 ML", form: "INJECTION", nlem: "ED ค.", depts: ["PSY"] },
+            { id: 24, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "10.8 MG", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
+            { id: 25, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "3.6 MG", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
+            { id: 26, name: "[ESP] HAEMOPHILUS INFLUENZAE (HIB) VACCINE (CO)", strength: "0.5 ML", form: "INJECTION", nlem: "NED", depts: ["PEDIATRICS", "MED"] },
+            { id: 27, name: "[ESP] INSULIN ASPART INJ", strength: "100IU/ML:3ML", form: "INJECTION", nlem: "ED ง.", depts: ["ENDOCRINE", "MED"] },
+            { id: 28, name: "[ESP] IXEKIZUMAB INJ PFS (CO)", strength: "80 MG", form: "INJECTION", nlem: "NED", depts: ["SKIN"] },
+            { id: 29, name: "[ESP] LECANEMAB INJ (PAY) [CHEMO]", strength: "200MG/2ML", form: "INJECTION", nlem: "NED", depts: ["NEURO"] },
+            { id: 30, name: "[ESP] LEUPRORELIN IMPLANT (PAY)", strength: "5 MG", form: "IMPLANT", nlem: "NED", depts: ["ONCO", "URO"] },
+            { id: 31, name: "[ESP] Megestrol acetate ORAL SUSPENSION (CO)", strength: "40 MG/ML:120ML", form: "SUSPENSION", nlem: "NED", depts: ["ONCO", "MED"] },
+            { id: 32, name: "[ESP] MEMANTINE HCL ORAL SOLUTION (CO)", strength: "5MG/PUMP:100ML", form: "SOLUTION", nlem: "NED", depts: ["NEURO", "PSY"] },
+            { id: 33, name: "[ESP] MENINGOCOCCAL POLYSACCHARIDE VACCINE (CO)", strength: "0.5 ML", form: "INJECTION", nlem: "NED", depts: ["MED"] },
+            { id: 34, name: "[ESP] METHYLPHENIDATE HCL (CO)", strength: "27 MG", form: "TABLET", nlem: "NED", depts: ["PSY"] },
+            { id: 35, name: "[ESP] METHYLPHENIDATE HCL (CO)", strength: "36 MG", form: "TABLET", nlem: "NED", depts: ["PSY"] },
+            { id: 36, name: "[ESP] NETUPITANT PALONOSETRON (PAY)", strength: "300 MG/500 MCG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 37, name: "[ESP] PALONOSETRON (CO)", strength: "250 MCG/5ML", form: "INJECTION", nlem: "NED", depts: ["ONCO", "MED"] },
+            { id: 38, name: "[ESP] PANCREATIN (CREON)", strength: "10000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
+            { id: 39, name: "[ESP] PANCREATIN (CREON)", strength: "25000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
+            { id: 40, name: "[ESP] PANCREATIN (CREON)", strength: "40000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
+            { id: 41, name: "[ESP] RUXOLITINIB (CO)", strength: "5 MG", form: "TABLET", nlem: "NED", depts: ["HEMATO"] },
+            { id: 42, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "300 MG/2ML", form: "INJECTION", nlem: "NED", depts: ["SKIN", "MED"] },
+            { id: 43, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "150 MG/ML", form: "INJECTION", nlem: "NED", depts: ["SKIN", "MED"] },
+            { id: 44, name: "[ESP] SULFINPYRAZONE (CO)", strength: "100 MG", form: "TABLET", nlem: "NED", depts: ["ESRD", "MED"] },
+            { id: 45, name: "[ESP] TEGAFUR/OTERACIL/GIMERACIL (CO) [CHEMO]", strength: "25/24.5/7.25 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 46, name: "[ESP] TESTOVIRON DEPOT INJ", strength: "250 MG", form: "INJECTION", nlem: "ED ค.", depts: ["ENDOCRINE", "MED"] },
+            { id: 47, name: "[ESP] TIRZEPATIDE (PAY)", strength: "10MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
+            { id: 48, name: "[ESP] TIRZEPATIDE (PAY)", strength: "7.5MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
+            { id: 49, name: "[ESP] TIRZEPATIDE (PAY)", strength: "15 MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
+            { id: 50, name: "[ESP] TRAMETINIB (CO) [CHEMO]", strength: "2 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 51, name: "[ESP] VEDOLIZUMAB จ.2 [CHEMO]", strength: "300 MG", form: "INJECTION", nlem: "ED จ.2", depts: ["GI"] },
+            { id: 52, name: "[ESP] (Allutamide) ENZALUTAMIDE (PAY)", strength: "40 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO", "URO"] },
+            { id: 53, name: "[ESP] (Xtandi) ENZALUTAMIDE (CO)", strength: "40 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO", "URO"] },
+            { id: 54, name: "[ESP] โครงการฟรี FRUQUINTINIB [CHEMO]", strength: "5 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 55, name: "[ESP] โครงการฟรี CRIZOTINIB [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
+            { id: 56, name: "[ESP] ABEMACICLIB (CO) [CHEMO]", strength: "150 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 57, name: "[ESP] SUNITINIB (CO)", strength: "12.5 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
+            { id: 58, name: "[ESP] L-ISOLEUCINE+L-LEUCINE+L-VALINE (CO)", strength: "952/1904/1144 MG", form: "GRANULES", nlem: "NED", depts: ["GI", "MED"] }
+        ];
 
-            // Get DOM elements
+        // Badge styling helper for NLEM status
+        function getNlemBadgeClass(status) {
+            switch (status) {
+                case 'NED':
+                    return 'bg-amber-100 text-amber-800 border-amber-200';
+                case 'ED ง.':
+                    return 'bg-emerald-100 text-emerald-800 border-emerald-200';
+                case 'ED ค.':
+                    return 'bg-purple-100 text-purple-800 border-purple-200';
+                case 'ED ข.':
+                    return 'bg-sky-100 text-sky-800 border-sky-200';
+                case 'ED จ.2':
+                    return 'bg-indigo-100 text-indigo-800 border-indigo-200';
+                default:
+                    return 'bg-slate-100 text-slate-800 border-slate-200';
+            }
+        }
+
+        // Badge styling for Departments
+        function getDeptBadgeClass(dept) {
+            const map = {
+                'ONCO': 'bg-rose-50 text-rose-700 border-rose-200',
+                'HEMATO': 'bg-red-50 text-red-700 border-red-200',
+                'NEURO': 'bg-cyan-50 text-cyan-700 border-cyan-200',
+                'PSY': 'bg-violet-50 text-violet-700 border-violet-200',
+                'CARDIO': 'bg-pink-50 text-pink-700 border-pink-200',
+                'ENDOCRINE': 'bg-sky-50 text-sky-700 border-sky-200',
+                'GI': 'bg-amber-50 text-amber-700 border-amber-200',
+                'SURG': 'bg-orange-50 text-orange-700 border-orange-200',
+                'ORTHO': 'bg-stone-50 text-stone-700 border-stone-200',
+                'URO': 'bg-teal-50 text-teal-700 border-teal-200',
+                'ESRD': 'bg-fuchsia-50 text-fuchsia-700 border-fuchsia-200',
+                'MED': 'bg-slate-100 text-slate-700 border-slate-200',
+                'SKIN': 'bg-lime-50 text-lime-700 border-lime-200',
+                'PEDIATRICS': 'bg-emerald-50 text-emerald-700 border-emerald-200'
+            };
+            return map[dept] || 'bg-slate-100 text-slate-700 border-slate-200';
+        }
+
+        // Render Application logic on DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', () => {
             const tableBody = document.getElementById('drug-table-body');
-            const emptyState = document.getElementById('empty-state');
             const searchInput = document.getElementById('search-input');
-            const filterDept = document.getElementById('filter-dept');
-            const filterNlem = document.getElementById('filter-nlem');
-            const resetBtn = document.getElementById('reset-btn');
-            const displayedCountEl = document.getElementById('displayed-count');
-            const totalCountEl = document.getElementById('total-count');
-            const statTotalEl = document.getElementById('stat-total');
-            const statNedEl = document.getElementById('stat-ned');
-            const statEdEl = document.getElementById('stat-ed');
+            const deptFilter = document.getElementById('dept-filter');
+            const nlemFilter = document.getElementById('nlem-filter');
+            const noResults = document.getElementById('no-results');
+            const btnReset = document.getElementById('btn-reset-filters');
+            const btnResetBar = document.getElementById('btn-reset-filters-bar');
 
-            // Render Function with strictly balanced text sizes
+            // Render Rows
             function renderTable(data) {
-                if (!tableBody) return;
-                
                 tableBody.innerHTML = '';
 
                 if (data.length === 0) {
-                    emptyState.classList.remove('hidden');
+                    noResults.classList.remove('hidden');
+                    return;
                 } else {
-                    emptyState.classList.add('hidden');
-
-                    data.forEach(item => {
-                        const row = document.createElement('tr');
-                        row.className = 'hover:bg-slate-50 transition-colors border-b border-slate-100';
-
-                        // Badge Styling
-                        let nlemBadge = '';
-                        if (item.nlem === 'NED') {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-amber-100 text-amber-800 border border-amber-200 text-sm">NED</span>`;
-                        } else if (item.nlem === 'ED จ.2') {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-indigo-100 text-indigo-800 border border-indigo-200 text-sm">ED จ.2</span>`;
-                        } else if (item.nlem === 'ED ง.') {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-blue-100 text-blue-800 border border-blue-200 text-sm">ED ง.</span>`;
-                        } else if (item.nlem === 'ED ค.') {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-sm">ED ค.</span>`;
-                        } else if (item.nlem === 'ED ข.') {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-teal-100 text-teal-800 border border-teal-200 text-sm">ED ข.</span>`;
-                        } else {
-                            nlemBadge = `<span class="inline-block px-2.5 py-0.5 font-medium rounded-full bg-slate-100 text-slate-800 border border-slate-200 text-sm">${item.nlem}</span>`;
-                        }
-
-                        // Department Tags Rendering
-                        const deptTags = item.dept.split(', ').map(d => 
-                            `<span class="inline-block bg-slate-100 px-2 py-0.5 rounded font-medium text-slate-700 border border-slate-200 text-sm mr-1 my-0.5">${d}</span>`
-                        ).join('');
-
-                        row.innerHTML = `
-                            <td class="py-3 px-3 text-center font-medium text-slate-500 text-sm">${item.id}</td>
-                            <td class="py-3 px-4 font-medium text-slate-800 text-sm">${item.name}</td>
-                            <td class="py-3 px-4 font-medium text-slate-600 font-mono text-sm">${item.strength}</td>
-                            <td class="py-3 px-4 font-medium text-slate-600 text-sm"><span class="bg-slate-50 px-2 py-0.5 rounded font-medium text-slate-600 border border-slate-200">${item.form}</span></td>
-                            <td class="py-3 px-3 text-center font-medium text-sm">${nlemBadge}</td>
-                            <td class="py-3 px-4 font-medium text-sm">${deptTags}</td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
+                    noResults.classList.add('hidden');
                 }
 
-                if (displayedCountEl) displayedCountEl.textContent = data.length;
+                data.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    // Zebra Striping & Hover Effects
+                    row.className = index % 2 === 0 
+                        ? 'bg-white hover:bg-emerald-50/40 transition-colors' 
+                        : 'bg-slate-50/60 hover:bg-emerald-50/40 transition-colors';
+
+                    const deptBadges = item.depts.map(d => 
+                        `<span class="inline-block px-2 py-0.5 text-xs font-normal rounded border ${getDeptBadgeClass(d)} mr-1 mb-1">${d}</span>`
+                    ).join('');
+
+                    row.innerHTML = `
+                        <td class="py-3 px-4 text-center text-slate-500 font-normal">${item.id}</td>
+                        <td class="py-3 px-4 font-normal text-slate-900 leading-snug">${item.name}</td>
+                        <td class="py-3 px-4 font-normal text-slate-700">${item.strength}</td>
+                        <td class="py-3 px-4 font-normal text-slate-600">${item.form}</td>
+                        <td class="py-3 px-4 text-center">
+                            <span class="inline-block px-2.5 py-0.5 text-xs font-normal rounded-full border ${getNlemBadgeClass(item.nlem)}">
+                                ${item.nlem}
+                            </span>
+                        </td>
+                        <td class="py-3 px-4 font-normal">
+                            <div class="flex flex-wrap items-center">${deptBadges}</div>
+                        </td>
+                    `;
+                    tableBody.appendChild(row);
+                });
             }
 
-            // Calculate & Update Summary Stats Dynamically
-            function updateSummaryStats() {
-                const total = drugData.length;
-                const nedCount = drugData.filter(d => d.nlem === 'NED').length;
-                const edCount = total - nedCount;
-
-                if (statTotalEl) statTotalEl.textContent = total;
-                if (statNedEl) statNedEl.textContent = nedCount;
-                if (statEdEl) statEdEl.textContent = edCount;
-                if (totalCountEl) totalCountEl.textContent = total;
-            }
-
-            // Dynamic Filter & Search Logic
+            // Filter Engine
             function filterData() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                const selectedDept = filterDept.value;
-                const selectedNlem = filterNlem.value;
+                const query = searchInput.value.trim().toLowerCase();
+                const selectedDept = deptFilter.value;
+                const selectedNlem = nlemFilter.value;
 
                 const filtered = drugData.filter(item => {
-                    const matchesSearch = item.name.toLowerCase().includes(searchTerm) ||
-                                          item.strength.toLowerCase().includes(searchTerm) ||
-                                          item.form.toLowerCase().includes(searchTerm) ||
-                                          item.nlem.toLowerCase().includes(searchTerm) ||
-                                          item.dept.toLowerCase().includes(searchTerm);
+                    // Text search
+                    const matchesSearch = query === '' || 
+                        item.name.toLowerCase().includes(query) ||
+                        item.strength.toLowerCase().includes(query) ||
+                        item.form.toLowerCase().includes(query) ||
+                        item.depts.some(d => d.toLowerCase().includes(query));
 
-                    const matchesDept = (selectedDept === 'ALL') || item.dept.split(', ').includes(selectedDept);
-                    const matchesNlem = (selectedNlem === 'ALL') || (item.nlem === selectedNlem);
+                    // Dept filter
+                    const matchesDept = selectedDept === 'ALL' || item.depts.includes(selectedDept);
+
+                    // NLEM filter
+                    const matchesNlem = selectedNlem === 'ALL' || item.nlem === selectedNlem;
 
                     return matchesSearch && matchesDept && matchesNlem;
                 });
@@ -355,22 +440,23 @@
                 renderTable(filtered);
             }
 
-            // Event Listeners
-            if (searchInput) searchInput.addEventListener('input', filterData);
-            if (filterDept) filterDept.addEventListener('change', filterData);
-            if (filterNlem) filterNlem.addEventListener('change', filterData);
-
-            if (resetBtn) {
-                resetBtn.addEventListener('click', () => {
-                    if (searchInput) searchInput.value = '';
-                    if (filterDept) filterDept.value = 'ALL';
-                    if (filterNlem) filterNlem.value = 'ALL';
-                    renderTable(drugData);
-                });
+            // Reset action function
+            function resetAllFilters() {
+                searchInput.value = '';
+                deptFilter.value = 'ALL';
+                nlemFilter.value = 'ALL';
+                filterData();
             }
 
-            // Initial Execution
-            updateSummaryStats();
+            // Event Listeners
+            searchInput.addEventListener('input', filterData);
+            deptFilter.addEventListener('change', filterData);
+            nlemFilter.addEventListener('change', filterData);
+
+            if (btnReset) btnReset.addEventListener('click', resetAllFilters);
+            if (btnResetBar) btnResetBar.addEventListener('click', resetAllFilters);
+
+            // Initial Render
             renderTable(drugData);
         });
     </script>
