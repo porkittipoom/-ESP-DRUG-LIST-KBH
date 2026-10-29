@@ -89,13 +89,13 @@
                     </h1>
                     <p class="text-emerald-100 text-sm sm:text-base mt-1 font-medium flex items-center gap-2">
                         <i class="fa-regular fa-calendar-check text-emerald-300"></i>
-                        ข้อมูลอัปเดตล่าสุด: 58 รายการ (ปีงบ2570)
+                        ข้อมูลอัปเดตล่าสุด: 60 รายการ (ปีงบ2570)
                     </p>
                 </div>
-                <!-- Print / Print PDF Button (Replaces Total Badge) -->
-                <button onclick="window.print()" class="flex items-center gap-2.5 bg-emerald-700/80 hover:bg-emerald-600 active:bg-emerald-800 text-white font-medium px-5 py-2.5 rounded-full border border-emerald-500/30 shadow-sm transition-all self-start md:self-auto cursor-pointer">
-                    <i class="fa-solid fa-print text-lg"></i>
-                    <span>พิมพ์ / พิมพ์PDF</span>
+                <!-- Print / Print PDF Button (Compact & Sleek Design) -->
+                <button onclick="window.print()" class="flex items-center gap-2 bg-emerald-700/80 hover:bg-emerald-600 active:bg-emerald-800 text-white text-xs sm:text-sm font-medium px-3.5 py-2 rounded-lg border border-emerald-500/30 shadow-sm transition-all self-start md:self-auto cursor-pointer">
+                    <i class="fa-solid fa-print"></i>
+                    <span>พิมพ์ / พิมพ์ PDF</span>
                 </button>
             </div>
         </div>
@@ -113,7 +113,7 @@
                 </div>
                 <div>
                     <div class="text-xs font-medium text-slate-500">ยาทั้งหมด</div>
-                    <div class="text-xl font-bold text-slate-800" id="stat-total">58</div>
+                    <div class="text-xl font-bold text-slate-800" id="stat-total">60</div>
                 </div>
             </div>
             <!-- NED -->
@@ -123,46 +123,46 @@
                 </div>
                 <div>
                     <div class="text-xs font-medium text-slate-500">ยานอกบัญชี (NED)</div>
-                    <div class="text-xl font-bold text-amber-600" id="stat-ned">43</div>
+                    <div class="text-xl font-bold text-amber-600" id="stat-ned">45</div>
                 </div>
             </div>
-            <!-- ED ง. -->
+            <!-- ED EX -->
             <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
                 <div class="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
                     <i class="fa-solid fa-file-medical text-lg"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-slate-500">ED ง.</div>
+                    <div class="text-xs font-medium text-slate-500">ED EX</div>
                     <div class="text-xl font-bold text-emerald-600" id="stat-ed-ng">10</div>
                 </div>
             </div>
-            <!-- ED ค. -->
+            <!-- ED S -->
             <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
                 <div class="p-3 bg-purple-50 text-purple-600 rounded-lg">
                     <i class="fa-solid fa-notes-medical text-lg"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-slate-500">ED ค.</div>
+                    <div class="text-xs font-medium text-slate-500">ED S</div>
                     <div class="text-xl font-bold text-purple-600" id="stat-ed-kh">2</div>
                 </div>
             </div>
-            <!-- ED ข. -->
+            <!-- ED B -->
             <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
                 <div class="p-3 bg-sky-50 text-sky-600 rounded-lg">
                     <i class="fa-solid fa-capsules text-lg"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-slate-500">ED ข.</div>
+                    <div class="text-xs font-medium text-slate-500">ED B</div>
                     <div class="text-xl font-bold text-sky-600" id="stat-ed-k">1</div>
                 </div>
             </div>
-            <!-- ED จ.2 -->
+            <!-- ED R2 -->
             <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3">
                 <div class="p-3 bg-indigo-50 text-indigo-600 rounded-lg">
                     <i class="fa-solid fa-shield-virus text-lg"></i>
                 </div>
                 <div>
-                    <div class="text-xs font-medium text-slate-500">ED จ.2</div>
+                    <div class="text-xs font-medium text-slate-500">ED R2</div>
                     <div class="text-xl font-bold text-indigo-600" id="stat-ed-j2">2</div>
                 </div>
             </div>
@@ -209,10 +209,10 @@
                     <select id="nlem-filter" class="w-full py-2.5 px-3 bg-slate-50 border border-slate-300 rounded-lg text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all">
                         <option value="ALL">สถานะ NLEM ทั้งหมด</option>
                         <option value="NED">NED (ยานอกบัญชี)</option>
-                        <option value="ED ง.">ED ง.</option>
-                        <option value="ED ค.">ED ค.</option>
-                        <option value="ED ข.">ED ข.</option>
-                        <option value="ED จ.2">ED จ.2</option>
+                        <option value="ED EX">ED EX</option>
+                        <option value="ED S">ED S</option>
+                        <option value="ED B">ED B</option>
+                        <option value="ED R2">ED R2</option>
                     </select>
                 </div>
 
@@ -263,7 +263,7 @@
 
     <!-- JavaScript Application Code -->
     <script>
-        // Master Dataset (58 Items) - Corrected & Validated
+        // Master Dataset (60 Items)
         const drugData = [
             { id: 1, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
             { id: 2, name: "[ESP] TEMOZOLOMIDE (CO) [CHEMO]", strength: "100 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
@@ -272,26 +272,26 @@
             { id: 5, name: "[ESP] ARIPIPRAZOLE (CO)", strength: "10 MG", form: "TABLET", nlem: "NED", depts: ["PSY", "NEURO", "MED"] },
             { id: 6, name: "[ESP] (Alvopanib) PAZOPANIB (PAY)", strength: "200 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
             { id: 7, name: "[ESP] (Votrient) PAZOPANIB (CO)", strength: "200 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
-            { id: 8, name: "[ESP] BCG MEDAC FOR BLADDER INTRAVESICAL", strength: "200M CFU", form: "INTRAVESICAL", nlem: "ED ง.", depts: ["URO", "MED"] },
-            { id: 9, name: "[ESP] BENDAMUSTINE INJ จ.2 [CHEMO]", strength: "100 MG", form: "INJECTION", nlem: "ED จ.2", depts: ["HEMATO"] },
+            { id: 8, name: "[ESP] BCG MEDAC FOR BLADDER INTRAVESICAL", strength: "200M CFU", form: "INTRAVESICAL", nlem: "ED EX", depts: ["URO", "MED"] },
+            { id: 9, name: "[ESP] BENDAMUSTINE INJ จ.2 [CHEMO]", strength: "100 MG", form: "INJECTION", nlem: "ED R2", depts: ["HEMATO"] },
             { id: 10, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "180 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
             { id: 11, name: "[ESP] BRIGATINIB (CO) [CHEMO]", strength: "90 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
-            { id: 12, name: "[ESP] CLONIDINE", strength: "0.15 MG", form: "TABLET", nlem: "ED ข.", depts: ["MED", "ESRD"] },
+            { id: 12, name: "[ESP] CLONIDINE", strength: "0.15 MG", form: "TABLET", nlem: "ED B", depts: ["MED", "ESRD"] },
             { id: 13, name: "[ESP] DABRAFENIB (CO) [CHEMO]", strength: "75 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
-            { id: 14, name: "[ESP] DESMOPRESSIN ACETATE NASAL SPRAY", strength: "0.1 MG/PUFF", form: "NASAL SPRAY", nlem: "ED ง.", depts: ["MED", "ENDOCRINE"] },
-            { id: 15, name: "[ESP] DESMOPRESSIN SOLUTION", strength: "0.1 MG/ML", form: "NASAL DROP", nlem: "ED ง.", depts: ["MED", "ENDOCRINE"] },
+            { id: 14, name: "[ESP] DESMOPRESSIN ACETATE NASAL SPRAY", strength: "0.1 MG/PUFF", form: "NASAL SPRAY", nlem: "ED EX", depts: ["MED", "ENDOCRINE"] },
+            { id: 15, name: "[ESP] DESMOPRESSIN SOLUTION", strength: "0.1 MG/ML", form: "NASAL DROP", nlem: "ED EX", depts: ["MED", "ENDOCRINE"] },
             { id: 16, name: "[ESP] DONEPEZIL (CO)", strength: "23 MG", form: "TABLET", nlem: "NED", depts: ["NEURO", "PSY"] },
             { id: 17, name: "[ESP] ELTROMBOPAG FCT (CO)", strength: "25 MG", form: "TABLET", nlem: "NED", depts: ["HEMATO"] },
             { id: 18, name: "[ESP] ERIBULIN MESYLATE INJ (CO) [CHEMO]", strength: "1MG/2ML", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
             { id: 19, name: "[ESP] EVOLOCUMAB INJ (CO)", strength: "140 MG/ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "MED"] },
-            { id: 20, name: "[ESP] FLECAINIDE (TAMBOCOR)", strength: "100 MG", form: "TABLET", nlem: "ED ง.", depts: ["CARDIO"] },
-            { id: 21, name: "[ESP] FLUCYTOSINE", strength: "500 MG", form: "CAPSULE", nlem: "ED ง.", depts: ["MED", "GI"] },
-            { id: 22, name: "[ESP] FLUDROCORTISONE", strength: "0.1 MG", form: "TABLET", nlem: "ED ง.", depts: ["ENDOCRINE", "MED"] },
-            { id: 23, name: "[ESP] FLUPENTIXOL DECANOATE INJ", strength: "40 MG/2 ML", form: "INJECTION", nlem: "ED ค.", depts: ["PSY"] },
+            { id: 20, name: "[ESP] FLECAINIDE (TAMBOCOR)", strength: "100 MG", form: "TABLET", nlem: "ED EX", depts: ["CARDIO"] },
+            { id: 21, name: "[ESP] FLUCYTOSINE", strength: "500 MG", form: "CAPSULE", nlem: "ED EX", depts: ["MED", "GI"] },
+            { id: 22, name: "[ESP] FLUDROCORTISONE", strength: "0.1 MG", form: "TABLET", nlem: "ED EX", depts: ["ENDOCRINE", "MED"] },
+            { id: 23, name: "[ESP] FLUPENTIXOL DECANOATE INJ", strength: "40 MG/2 ML", form: "INJECTION", nlem: "ED S", depts: ["PSY"] },
             { id: 24, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "10.8 MG", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
             { id: 25, name: "[ESP] GOSERELIN IMPLANT PFS (CO)", strength: "3.6 MG", form: "INJECTION", nlem: "NED", depts: ["ONCO"] },
             { id: 26, name: "[ESP] HAEMOPHILUS INFLUENZAE (HIB) VACCINE (CO)", strength: "0.5 ML", form: "INJECTION", nlem: "NED", depts: ["PEDIATRICS", "MED"] },
-            { id: 27, name: "[ESP] INSULIN ASPART INJ", strength: "100IU/ML:3ML", form: "INJECTION", nlem: "ED ง.", depts: ["ENDOCRINE", "MED"] },
+            { id: 27, name: "[ESP] INSULIN ASPART INJ", strength: "100IU/ML:3ML", form: "INJECTION", nlem: "ED EX", depts: ["ENDOCRINE", "MED"] },
             { id: 28, name: "[ESP] IXEKIZUMAB INJ PFS (CO)", strength: "80 MG", form: "INJECTION", nlem: "NED", depts: ["SKIN"] },
             { id: 29, name: "[ESP] LECANEMAB INJ (PAY) [CHEMO]", strength: "200MG/2ML", form: "INJECTION", nlem: "NED", depts: ["NEURO"] },
             { id: 30, name: "[ESP] LEUPRORELIN IMPLANT (PAY)", strength: "5 MG", form: "IMPLANT", nlem: "NED", depts: ["ONCO", "URO"] },
@@ -302,27 +302,29 @@
             { id: 35, name: "[ESP] METHYLPHENIDATE HCL (CO)", strength: "36 MG", form: "TABLET", nlem: "NED", depts: ["PSY"] },
             { id: 36, name: "[ESP] NETUPITANT PALONOSETRON (PAY)", strength: "300 MG/500 MCG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
             { id: 37, name: "[ESP] PALONOSETRON (CO)", strength: "250 MCG/5ML", form: "INJECTION", nlem: "NED", depts: ["ONCO", "MED"] },
-            { id: 38, name: "[ESP] PANCREATIN (CREON)", strength: "10000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
-            { id: 39, name: "[ESP] PANCREATIN (CREON)", strength: "25000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
-            { id: 40, name: "[ESP] PANCREATIN (CREON)", strength: "40000 IU", form: "CAPSULE", nlem: "ED ง.", depts: ["GI", "SURG", "MED"] },
+            { id: 38, name: "[ESP] PANCREATIN (CREON)", strength: "10000 IU", form: "CAPSULE", nlem: "ED EX", depts: ["GI", "SURG", "MED"] },
+            { id: 39, name: "[ESP] PANCREATIN (CREON)", strength: "25000 IU", form: "CAPSULE", nlem: "ED EX", depts: ["GI", "SURG", "MED"] },
+            { id: 40, name: "[ESP] PANCREATIN (CREON)", strength: "40000 IU", form: "CAPSULE", nlem: "ED EX", depts: ["GI", "SURG", "MED"] },
             { id: 41, name: "[ESP] RUXOLITINIB (CO)", strength: "5 MG", form: "TABLET", nlem: "NED", depts: ["HEMATO"] },
             { id: 42, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "300 MG/2ML", form: "INJECTION", nlem: "NED", depts: ["SKIN", "MED"] },
             { id: 43, name: "[ESP] SECUKINUMAB INJ PFS (CO)", strength: "150 MG/ML", form: "INJECTION", nlem: "NED", depts: ["SKIN", "MED"] },
             { id: 44, name: "[ESP] SULFINPYRAZONE (CO)", strength: "100 MG", form: "TABLET", nlem: "NED", depts: ["ESRD", "MED"] },
             { id: 45, name: "[ESP] TEGAFUR/OTERACIL/GIMERACIL (CO) [CHEMO]", strength: "25/24.5/7.25 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
-            { id: 46, name: "[ESP] TESTOVIRON DEPOT INJ", strength: "250 MG", form: "INJECTION", nlem: "ED ค.", depts: ["ENDOCRINE", "MED"] },
+            { id: 46, name: "[ESP] TESTOVIRON DEPOT INJ", strength: "250 MG", form: "INJECTION", nlem: "ED S", depts: ["ENDOCRINE", "MED"] },
             { id: 47, name: "[ESP] TIRZEPATIDE (PAY)", strength: "10MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
             { id: 48, name: "[ESP] TIRZEPATIDE (PAY)", strength: "7.5MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
             { id: 49, name: "[ESP] TIRZEPATIDE (PAY)", strength: "15 MG/0.6ML:2.4ML", form: "INJECTION", nlem: "NED", depts: ["CARDIO", "ENDOCRINE", "MED"] },
             { id: 50, name: "[ESP] TRAMETINIB (CO) [CHEMO]", strength: "2 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
-            { id: 51, name: "[ESP] VEDOLIZUMAB จ.2 [CHEMO]", strength: "300 MG", form: "INJECTION", nlem: "ED จ.2", depts: ["GI"] },
+            { id: 51, name: "[ESP] VEDOLIZUMAB จ.2 [CHEMO]", strength: "300 MG", form: "INJECTION", nlem: "ED R2", depts: ["GI"] },
             { id: 52, name: "[ESP] (Allutamide) ENZALUTAMIDE (PAY)", strength: "40 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO", "URO"] },
             { id: 53, name: "[ESP] (Xtandi) ENZALUTAMIDE (CO)", strength: "40 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO", "URO"] },
             { id: 54, name: "[ESP] โครงการฟรี FRUQUINTINIB [CHEMO]", strength: "5 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
             { id: 55, name: "[ESP] โครงการฟรี CRIZOTINIB [CHEMO]", strength: "250 MG", form: "CAPSULE", nlem: "NED", depts: ["ONCO"] },
             { id: 56, name: "[ESP] ABEMACICLIB (CO) [CHEMO]", strength: "150 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
             { id: 57, name: "[ESP] SUNITINIB (CO)", strength: "12.5 MG", form: "TABLET", nlem: "NED", depts: ["ONCO"] },
-            { id: 58, name: "[ESP] L-ISOLEUCINE+L-LEUCINE+L-VALINE (CO)", strength: "952/1904/1144 MG", form: "GRANULES", nlem: "NED", depts: ["GI", "MED"] }
+            { id: 58, name: "[ESP] L-ISOLEUCINE+L-LEUCINE+L-VALINE (CO)", strength: "952/1904/1144 MG", form: "GRANULES", nlem: "NED", depts: ["GI", "MED"] },
+            { id: 59, name: "[ESP] VARICELLA ZOSTER LIVE ATTENUATED VACCINE (PAY)", strength: "1350 PFU / 0.5 ML", form: "INJECTION", nlem: "NED", depts: ["PEDIATRICS", "MED"] },
+            { id: 60, name: "[ESP] (Paxlovid) NIRMATRELVIR + RITONAVIR (CO)", strength: "150 / 100 MG", form: "TABLET", nlem: "NED", depts: ["MED"] }
         ];
 
         // Badge styling helper for NLEM status
@@ -330,13 +332,13 @@
             switch (status) {
                 case 'NED':
                     return 'bg-amber-100 text-amber-800 border-amber-200';
-                case 'ED ง.':
+                case 'ED EX':
                     return 'bg-emerald-100 text-emerald-800 border-emerald-200';
-                case 'ED ค.':
+                case 'ED S':
                     return 'bg-purple-100 text-purple-800 border-purple-200';
-                case 'ED ข.':
+                case 'ED B':
                     return 'bg-sky-100 text-sky-800 border-sky-200';
-                case 'ED จ.2':
+                case 'ED R2':
                     return 'bg-indigo-100 text-indigo-800 border-indigo-200';
                 default:
                     return 'bg-slate-100 text-slate-800 border-slate-200';
